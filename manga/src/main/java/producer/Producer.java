@@ -1,4 +1,4 @@
-package manga;
+package producer;
 
 public class Producer {
 
