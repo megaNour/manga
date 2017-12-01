@@ -27,7 +27,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								producer.Producer
+								production.Producer
 							</mainClass>
 						</manifest>
 					</archive>
