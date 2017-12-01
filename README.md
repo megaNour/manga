@@ -1,1 +1,3 @@
 # manga
+manga producing scripts. First made in bash / shell.
+Being ported to java after pooping blood from bash / shell dev...
