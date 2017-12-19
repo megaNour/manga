@@ -11,6 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -19,6 +26,8 @@ import javax.imageio.ImageIO;
 
 public class Producer {
 	private static int width = 800;
+	private static ExecutorService executor = Executors.newFixedThreadPool(4);
+	private static List<Callable<?>> tasks = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException {
 		if(args.length == 0) {
@@ -65,6 +74,12 @@ public class Producer {
 				}
 			}
 		}
+		try {
+			List<Future<String>> futures = executor.invokeAll((Collection<? extends Callable<String>>) tasks);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.exit(0);
 	}
 
 	private static String formatPageNum(String arg) {
@@ -80,10 +95,10 @@ public class Producer {
 
 	private static void produce(int paramWidth, Path entry) throws IOException {
 		if(entry.getFileName().toString().endsWith(".kra")) {
-			Thread decompresseur = new Thread(new Runnable() {
+			Callable<String> task = new Callable<String>() {
 
 				@Override
-				public void run() {
+				public String call() {
 					ZipInputStream zip;
 					ZipFile zipped;
 					try {
@@ -105,15 +120,18 @@ public class Producer {
 								g.drawImage(input, 0, 0, paramWidth, height, null);
 								g.dispose();
 								ImageIO.write(output, "jpg", new File("../jpg/" + file.getName().replaceAll("kra$", "jpg")));
+								zipped.close();
+								zip.close();
 								break;
 							}
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					return null;
 				}
-			});
-			decompresseur.start();
+			};
+			tasks.add(task);
 		}
 	}
 }
