@@ -18,7 +18,6 @@ import java.util.zip.ZipInputStream;
 import javax.imageio.ImageIO;
 
 public class Producer {
-	private static int i;
 	private static int width = 800;
 
 	public static void main(String[] args) throws IOException {
@@ -81,7 +80,6 @@ public class Producer {
 
 	private static void produce(int paramWidth, Path entry) throws IOException {
 		if(entry.getFileName().toString().endsWith(".kra")) {
-			final int j = i++;
 			Thread decompresseur = new Thread(new Runnable() {
 
 				@Override
@@ -96,16 +94,6 @@ public class Producer {
 						ZipEntry zipFile = null;
 						while((zipFile = zip.getNextEntry()) != null) {
 							if(zipFile.getName().equalsIgnoreCase("mergedimage.png")) {
-								//									BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("../png/" + fileName.replaceAll("kra$", "png")));	
-								//									byte[] buffer = new byte[8192];
-								//									int len;
-								//									while ((len = zip.read(buffer)) != -1) {
-								//										out.write(buffer, 0, len);
-								//									}
-								//									out.flush();
-								//									out.close();
-
-
 								InputStream zippedTarget = zipped.getInputStream(zipFile);
 								Path target = Paths.get("../png/" + file.getName().replaceAll("kra$", "png"));
 								System.out.println(target.getFileName().toAbsolutePath());
@@ -129,4 +117,3 @@ public class Producer {
 		}
 	}
 }
-
