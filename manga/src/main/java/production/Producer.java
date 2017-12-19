@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -29,6 +28,7 @@ public class Producer {
 	private static ExecutorService executor = Executors.newFixedThreadPool(4);
 	private static List<Callable<?>> tasks = new ArrayList<>();
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
 		if(args.length == 0) {
 			System.out.println("batch all files");
@@ -75,7 +75,7 @@ public class Producer {
 			}
 		}
 		try {
-			List<Future<String>> futures = executor.invokeAll((Collection<? extends Callable<String>>) tasks);
+			executor.invokeAll((Collection<? extends Callable<String>>) tasks);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
