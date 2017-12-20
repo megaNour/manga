@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -30,6 +31,7 @@ public class Producer {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
+		Date start = new Date();
 		if(args.length == 0) {
 			System.out.println("batch all files");
 			produce();
@@ -79,6 +81,9 @@ public class Producer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		Date stop = new Date();
+		double timeTaken = ((double)stop.getTime() - start.getTime()) / 1000;
+		System.out.println(timeTaken);
 		System.exit(0);
 	}
 
