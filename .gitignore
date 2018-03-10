@@ -1,6 +1,7 @@
 
-manga/\.settings/
+**/\.settings/
 
-manga/\.classpath
+**/\.classpath
 
-manga/\.project
+**/\.project
+**/target/
