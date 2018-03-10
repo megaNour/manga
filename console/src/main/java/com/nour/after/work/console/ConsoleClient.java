@@ -6,11 +6,12 @@ import java.net.Socket;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class ConsoleClient implements BundleActivator/*, ServiceListener*/ {
+public class ConsoleClient implements BundleActivator {
 
 	private int failCount;
 	private boolean die;
 	private String DIE_WORD = "die";
+	private String BYE_WORD = "bye";
 
 
 	@Override
@@ -23,23 +24,36 @@ public class ConsoleClient implements BundleActivator/*, ServiceListener*/ {
 		try {
 			Socket socket = new Socket("localhost", 2048);
 			PrintWriter out = new PrintWriter(socket.getOutputStream());
-//			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+			//			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			//			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String input;
 			System.out.println("connected after: " + failCount + " tries");
 			failCount = 0;
 			Thread outThread = new Thread() {
 				@Override
 				public void run() {
+					int counter = 0;
 					try {
-						int counter = 0;
-						while(!die) {
-							Thread.sleep(1000);
-							out.println("plop " + counter++);
+						byeLoop:
+						while(true) {
+							while(!die) {
+								String message = "wlop ";
+								message = "bye";
+								Thread.sleep(1000);
+								out.println(message);
+								out.flush();
+								if(message.toLowerCase().equals(BYE_WORD)) {
+									break byeLoop;
+								}
+							}
+							out.println(DIE_WORD);
 							out.flush();
+							System.out.println("Console Terminated");
+							break;
 						}
-						out.println(DIE_WORD);
-						out.flush();
+						out.close();
+						socket.close();
+						System.out.println("Console Socket Closed");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

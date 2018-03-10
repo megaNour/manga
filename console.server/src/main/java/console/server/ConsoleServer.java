@@ -19,7 +19,9 @@ public class ConsoleServer {
 		server = new ServerSocket(Integer.parseInt(args[0]));
 		while(true) {
 			Socket socket = server.accept();
-			new ClientThread(socket).start();
+			ClientThread client = new ClientThread(socket);
+			clients.add(client);
+			client.start();
 		}
 
 	}
