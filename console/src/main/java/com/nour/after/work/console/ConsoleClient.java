@@ -8,14 +8,14 @@ import org.osgi.framework.BundleContext;
 
 public class ConsoleClient implements BundleActivator/*, ServiceListener*/ {
 
-	private Process console;
 	private int failCount;
 	private boolean die;
+	private String DIE_WORD = "die";
 
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		console = Runtime.getRuntime().exec("telnet.sh");
+		Runtime.getRuntime().exec("consoleServer.sh");
 		connect();
 	}
 
@@ -38,6 +38,8 @@ public class ConsoleClient implements BundleActivator/*, ServiceListener*/ {
 							out.println("plop " + counter++);
 							out.flush();
 						}
+						out.println(DIE_WORD);
+						out.flush();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

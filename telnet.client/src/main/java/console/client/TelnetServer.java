@@ -1,4 +1,4 @@
-package telnet.server;
+package console.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,27 +7,25 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class TelnetClient {
+public class TelnetServer {
 
 	public static void main(String[] args) {
+		
 		try(
-		Socket socket = new Socket("127.0.0.1", 2048);
+		ServerSocket server = new ServerSocket(Integer.parseInt(args[0]));
+		Socket socket = server.accept();
 		PrintWriter out = new PrintWriter(socket.getOutputStream());
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-			
 		){
+			out.println("what is it ?");
+			out.flush();
 			String input;
 			while((input = in.readLine()) != null) {
-				System.out.println(input);
-				if(input.equals("echoed: bye")) {
+				System.out.println("input: " + input);
+				out.println("echoed: " + input);
+				out.flush();
+				if(input.equals("bye")) {
 					System.exit(0);
-				} else if (input.equals("hey ?")) {
-					out.write("hey !\r\n");
-					out.flush();
-				} else {
-					out.write(stdIn.readLine() + "\r\n");
-					out.flush();
 				}
 			}
 		} catch (IOException e) {
