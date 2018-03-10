@@ -1,4 +1,4 @@
-package console.server;
+package com.nour.after.work.console.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

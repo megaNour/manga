@@ -25,7 +25,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								console.server.ConsoleServer
+								com.nour.after.work.console.server.ConsoleServer
 							</mainClass>
 						</manifest>
 					</archive>
