@@ -1,4 +1,4 @@
-package com.nour.after.work.console.impl;
+package com.nour.after.work.console.swt.impl;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -9,11 +9,12 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
-import com.nour.after.work.console.api.ConsoleClientApi;
-import com.nour.after.work.console.api.CoucouApi;
+import com.nour.after.work.console.swt.api.ConsoleClientSwtApi;
+import com.nour.after.work.console.swt.api.CoucouApi;
 
-@Component(name="consoleClient", immediate=true)
-public class ConsoleClientImpl implements ConsoleClientApi {
+
+@Component(name="consoleSwtClient", immediate=true)
+public class ConsoleClientSwtImpl implements ConsoleClientSwtApi {
 
 	private int failCount;
 	private boolean die;
