@@ -5,23 +5,28 @@ import java.net.Socket;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 
-//@Component(name="consoleClient", immediate=true)
-public class ConsoleClientImpl implements BundleActivator {
+import com.nour.after.work.console.api.ConsoleClientApi;
+
+@Component(name="consoleClient", immediate=true)
+public class ConsoleClientImpl implements ConsoleClientApi, BundleActivator {
 
 	private int failCount;
 	private boolean die;
 	private String DIE_WORD = "die";
 	private String BYE_WORD = "bye";
 
-//	@Activate
+	@Activate
 	public void start(BundleContext context) throws Exception {
 		System.out.println("coucou");
 		Runtime.getRuntime().exec("consoleServer.sh");
 		connect();
 	}
 	
-//	@Override
+	@Override
 	public void connect() throws Exception {
 		try {
 			Socket socket = new Socket("localhost", 2048);
@@ -72,7 +77,7 @@ public class ConsoleClientImpl implements BundleActivator {
 
 	}
 
-//	@Deactivate
+	@Deactivate
 	public void stop(BundleContext context) throws Exception {
 		die = true;
 		System.out.println("mais il faut rester leger");
