@@ -29,10 +29,7 @@
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-maven-plugin</artifactId>
 				<configuration>
-					<bnd><![CDATA[
--exportcontents:\
- *,\
-]]></bnd>
+					<bndfile>bnd/bnd.bnd</bndfile>
 				</configuration>
 				<executions>
 					<execution>
@@ -50,23 +47,9 @@
 					<archive>
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
+					<outputDirectory>/home/b/programmes/felix-framework-5.6.10/bundle</outputDirectory>
 				</configuration>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.felix</groupId> -->
-			<!-- <artifactId>maven-bundle-plugin</artifactId> -->
-			<!-- <version>3.2.0</version> -->
-			<!-- <inherited>true</inherited> -->
-			<!-- <extensions>true</extensions> -->
-			<!-- <configuration> -->
-			<!-- <instructions> -->
-			<!-- <Export-Package>*</Export-Package> -->
-			<!-- <Private-Package>*</Private-Package> -->
-			<!-- <Bundle-Activator>com.nour.after.work.console.impl.ConsoleClientImpl</Bundle-Activator> -->
-			<!-- </instructions> -->
-			<!-- <buildDirectory>/home/b/programmes/felix-framework-5.6.10/bundle</buildDirectory> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
 
 		</plugins>
 	</build>
