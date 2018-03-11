@@ -1,4 +1,4 @@
-package com.nour.after.work.console;
+package com.nour.after.work.console.impl;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -6,21 +6,23 @@ import java.net.Socket;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class ConsoleClient implements BundleActivator {
+//@Component(name="consoleClient", immediate=true)
+public class ConsoleClientImpl implements BundleActivator {
 
 	private int failCount;
 	private boolean die;
 	private String DIE_WORD = "die";
 	private String BYE_WORD = "bye";
 
-
-	@Override
+//	@Activate
 	public void start(BundleContext context) throws Exception {
+		System.out.println("coucou");
 		Runtime.getRuntime().exec("consoleServer.sh");
 		connect();
 	}
-
-	private void connect() throws Exception {
+	
+//	@Override
+	public void connect() throws Exception {
 		try {
 			Socket socket = new Socket("localhost", 2048);
 			PrintWriter out = new PrintWriter(socket.getOutputStream());
@@ -37,8 +39,8 @@ public class ConsoleClient implements BundleActivator {
 						byeLoop:
 						while(true) {
 							while(!die) {
-								String message = "wlop ";
-								message = "bye";
+								String message = "wlop " + counter++;
+//								message = "bye";
 								Thread.sleep(1000);
 								out.println(message);
 								out.flush();
@@ -70,7 +72,7 @@ public class ConsoleClient implements BundleActivator {
 
 	}
 
-	@Override
+//	@Deactivate
 	public void stop(BundleContext context) throws Exception {
 		die = true;
 		System.out.println("mais il faut rester leger");
