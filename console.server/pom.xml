@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.nour.after.work</groupId>
-  <artifactId>console.server</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <properties>
-  	<java.version>1.8</java.version>
-  </properties>
-  <build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.nour.after.work</groupId>
+	<artifactId>console.server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -34,4 +35,18 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.swt</groupId>
+			<artifactId>gtk.linux.x86_64_3.105.3.v20170228</artifactId>
+			<version>0512</version>
+<!-- 			<scope>provided</scope> -->
+		</dependency>
+				<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.swt_3.105.3.v20170228</artifactId>
+			<version>0512</version>
+<!-- 			<scope>provided</scope> -->
+		</dependency>
+	</dependencies>
 </project>

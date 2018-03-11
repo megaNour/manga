@@ -1,4 +1,4 @@
-package com.nour.after.work.console.swt.api;
+package com.nour.after.work.console.client.swt.api;
 
 public interface ConsoleClientSwtApi {
 

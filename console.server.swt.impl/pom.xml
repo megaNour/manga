@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
-	<artifactId>console.swt.client.impl</artifactId>
+	<artifactId>console.swt.server.impl</artifactId>
 	<parent>
 		<groupId>com.nour.after.work</groupId>
 		<artifactId>bundle.parent</artifactId>
@@ -19,7 +19,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>console.swt.client.api</artifactId>
+			<artifactId>console.swt.server.api</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
@@ -31,12 +31,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.eclipse.platform</groupId> -->
-<!-- 			<artifactId>org.eclipse.swt_3.105.3.v20170228</artifactId> -->
-<!-- 			<version>0512</version> -->
-<!-- 			<scope>provided</scope> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.swt_3.105.3.v20170228</artifactId>
+			<version>0512</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.swt</groupId>

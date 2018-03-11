@@ -1,4 +1,4 @@
-package com.nour.after.work.console.swt.api;
+package com.nour.after.work.console.server.swt.api;
 
 public interface CoucouApi {
 	String COUCOU_WORD = "Coucou";

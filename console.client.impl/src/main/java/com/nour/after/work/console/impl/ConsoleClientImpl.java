@@ -12,7 +12,7 @@ import org.osgi.service.component.annotations.Reference;
 import com.nour.after.work.console.api.ConsoleClientApi;
 import com.nour.after.work.console.api.CoucouApi;
 
-@Component(name="consoleClient", immediate=true)
+@Component(immediate=true)
 public class ConsoleClientImpl implements ConsoleClientApi {
 
 	private int failCount;
@@ -53,8 +53,7 @@ public class ConsoleClientImpl implements ConsoleClientApi {
 						while(true) {
 							while(!die) {
 								String message = "wlop " + counter++;
-//								message = "bye";
-								Thread.sleep(1000);
+								Thread.sleep(50);
 								out.println(message);
 								out.flush();
 								if(message.toLowerCase().equals(BYE_WORD)) {

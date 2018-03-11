@@ -1,13 +1,13 @@
-package com.nour.after.work.console.swt.impl;
+package com.nour.after.work.console.server.swt.impl;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
-import com.nour.after.work.console.swt.api.CoucouApi;
+import com.nour.after.work.console.server.swt.api.CoucouApi;
 
-@Component(name="coucouSwt", immediate=true)
+@Component(name="coucouSwtServer", immediate=true)
 public class CoucouImpl implements CoucouApi {
 
 
