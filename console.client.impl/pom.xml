@@ -2,57 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
-	<groupId>com.nour.after.work</groupId>
 	<artifactId>console.client.impl</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<!-- <parent> -->
-	<!-- <groupId>com.nour.after.work</groupId> -->
-	<!-- <artifactId>bundle.parent</artifactId> -->
-	<!-- <version>0.0.1-SNAPSHOT</version> -->
-	<!-- </parent> -->
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>biz.aQute.bnd</groupId>
-				<artifactId>bnd-maven-plugin</artifactId>
-				<configuration>
-					<bndfile>bnd/bnd.bnd</bndfile>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>bnd-process</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-					</archive>
-					<outputDirectory>/home/b/programmes/felix-framework-5.6.10/bundle</outputDirectory>
-				</configuration>
-			</plugin>
-
-		</plugins>
-	</build>
+	<parent>
+		<groupId>com.nour.after.work</groupId>
+		<artifactId>bundle.parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<dependencies>
 
 		<dependency>
