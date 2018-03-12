@@ -15,15 +15,15 @@ public class ConsoleDisplay {
 
 	private static final Display  display;
 	private static StyledText consoleText;
-	static final Color green;
-	static final Color red;
-	static final Color black;
+	static final Color GREEN;
+	static final Color RED;
+	static final Color BLACK;
 
 	static {
 		display = new Display();
-		green = display.getSystemColor(SWT.COLOR_GREEN);
-		red = display.getSystemColor(SWT.COLOR_DARK_RED);
-		black = display.getSystemColor(SWT.COLOR_BLACK);
+		GREEN = display.getSystemColor(SWT.COLOR_GREEN);
+		RED = display.getSystemColor(SWT.COLOR_RED);
+		BLACK = display.getSystemColor(SWT.COLOR_BLACK);
 	}
 
 	public static void println(String message) {
@@ -40,10 +40,12 @@ public class ConsoleDisplay {
 			display.syncExec(new Runnable() {
 				@Override
 				public void run() {
-					int textLength = consoleText.getText().length();
-					StyleRange range = new StyleRange(textLength, message.length(), color, black);
-					consoleText.setStyleRange(range);
-					consoleText.append(message + "\r\n");
+//					synchronized (consoleText) {
+						consoleText.append(message + "\r\n");
+						int textLength = consoleText.getText().length() - 2;
+						StyleRange range = new StyleRange(textLength - message.length(), message.length(), color, BLACK);
+						consoleText.setStyleRange(range);
+//					}
 				}
 			});
 		}

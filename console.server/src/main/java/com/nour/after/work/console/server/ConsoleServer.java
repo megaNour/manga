@@ -6,10 +6,6 @@ import java.net.Socket;
 
 public class ConsoleServer {
 
-
-	//	public static ServerSocket server;
-	public static ConsoleDisplay consoleDisplay;
-
 	public static void main(String[] args) {
 		try (ServerSocket serverGreen = new ServerSocket(Integer.parseInt(args[0]));
 				ServerSocket serverRed = new ServerSocket(Integer.parseInt(args[0])+1);
@@ -29,7 +25,7 @@ public class ConsoleServer {
 						while(true) {
 							Socket socket;
 							socket = serverRed.accept();
-							ConsoleClientReader client = new ConsoleClientReader(socket);
+							ConsoleClientReader client = new ConsoleClientReader(socket, ConsoleDisplay.RED);
 							client.start();
 						}
 					} catch (IOException e) {
@@ -42,7 +38,7 @@ public class ConsoleServer {
 			while(true) {
 				Socket socket;
 				socket = serverGreen.accept();
-				ConsoleClientReader client = new ConsoleClientReader(socket);
+				ConsoleClientReader client = new ConsoleClientReader(socket, ConsoleDisplay.GREEN);
 				client.start();
 			}
 		} catch (NumberFormatException e1) {

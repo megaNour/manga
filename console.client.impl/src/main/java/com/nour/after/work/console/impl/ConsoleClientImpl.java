@@ -53,7 +53,7 @@ public class ConsoleClientImpl implements ConsoleClientApi {
 						while(true) {
 							while(!die) {
 								String message = "wlop " + counter++;
-								Thread.sleep(50);
+								Thread.sleep(10);
 								out.println(message);
 								out.flush();
 								if(message.toLowerCase().equals(BYE_WORD)) {

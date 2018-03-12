@@ -8,11 +8,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 
 public class ConsoleClientReader extends Thread {
+		private static final String BYE = "bye";
+		private static final String DIE = "die";
 		private static List<ConsoleClientReader> clients;
 		private Socket socket;
 		private PrintWriter out;
@@ -23,13 +23,10 @@ public class ConsoleClientReader extends Thread {
 			clients = new ArrayList<>();
 		}
 		
-		public ConsoleClientReader(Socket socket) {
+		public ConsoleClientReader(Socket socket, Color color) {
 			this.socket = socket;
-			if(socket.getPort()==2048) {
-				color = ConsoleDisplay.green;
-			} else {
-				color = ConsoleDisplay.red;
-			}
+			this.color = color;
+			clients.add(this);
 		}
 
 		@Override
@@ -42,13 +39,14 @@ public class ConsoleClientReader extends Thread {
 				out.flush();
 				String input;
 				while((input = in.readLine()) != null) {
-					if(input.equals("die")) {
+					if(input.equals(DIE)) {
 						for(ConsoleClientReader r : clients) {
 							r.closeNicely("I will be back...\r\nConsole Terminated");
 						}
 						System.exit(0);
-					} else if (input.equals("bye")) {
+					} else if (input.equals(BYE)) {
 						closeNicely("Ok! Bye...\r\nClosing nicely...");
+						clients.remove(this);
 						break;
 					}
 					ConsoleDisplay.println(input, color);
@@ -64,6 +62,5 @@ public class ConsoleClientReader extends Thread {
 			out.close();
 			in.close();
 			socket.close();
-			clients.remove(this);
 		}
 }
