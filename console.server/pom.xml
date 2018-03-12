@@ -42,11 +42,10 @@
 			<version>0512</version>
 <!-- 			<scope>provided</scope> -->
 		</dependency>
-				<dependency>
-			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.swt_3.105.3.v20170228</artifactId>
-			<version>0512</version>
-<!-- 			<scope>provided</scope> -->
-		</dependency>
+<!-- 				<dependency> -->
+<!-- 			<groupId>org.eclipse.platform</groupId> -->
+<!-- 			<artifactId>org.eclipse.swt_3.105.3.v20170228</artifactId> -->
+<!-- 			<version>0512</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 </project>
