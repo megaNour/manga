@@ -11,7 +11,9 @@ public class ConsoleServer {
 	public static ConsoleDisplay consoleDisplay;
 
 	public static void main(String[] args) {
-		try (ServerSocket server = new ServerSocket(Integer.parseInt(args[0]));){
+		try (ServerSocket serverGreen = new ServerSocket(Integer.parseInt(args[0]));
+				ServerSocket serverRed = new ServerSocket(Integer.parseInt(args[0])+1);
+				){
 
 			Thread displayThread = new Thread() {
 				public void run() {
@@ -21,10 +23,25 @@ public class ConsoleServer {
 
 			displayThread.start();
 
+			Thread redThread = new Thread() {
+				public void run() {
+					try {
+						while(true) {
+							Socket socket;
+							socket = serverRed.accept();
+							ConsoleClientReader client = new ConsoleClientReader(socket);
+							client.start();
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			};
+			redThread.start();
 
 			while(true) {
 				Socket socket;
-				socket = server.accept();
+				socket = serverGreen.accept();
 				ConsoleClientReader client = new ConsoleClientReader(socket);
 				client.start();
 			}

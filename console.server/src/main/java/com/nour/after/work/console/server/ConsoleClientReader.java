@@ -8,11 +8,16 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Display;
+
 public class ConsoleClientReader extends Thread {
 		private static List<ConsoleClientReader> clients;
 		private Socket socket;
 		private PrintWriter out;
 		private BufferedReader in;
+		private Color color;
 		
 		static {
 			clients = new ArrayList<>();
@@ -20,6 +25,11 @@ public class ConsoleClientReader extends Thread {
 		
 		public ConsoleClientReader(Socket socket) {
 			this.socket = socket;
+			if(socket.getPort()==2048) {
+				color = ConsoleDisplay.green;
+			} else {
+				color = ConsoleDisplay.red;
+			}
 		}
 
 		@Override
@@ -41,7 +51,7 @@ public class ConsoleClientReader extends Thread {
 						closeNicely("Ok! Bye...\r\nClosing nicely...");
 						break;
 					}
-					ConsoleDisplay.println(input);
+					ConsoleDisplay.println(input, color);
 					System.out.println(input);
 				}
 			} catch (IOException e) {
